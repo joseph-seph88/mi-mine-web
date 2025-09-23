@@ -13,14 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "나를 찾아 떠나는 특별한 여행 | 개인 포트폴리오",
-  description: "사진, 영상, 그리고 이야기로 채워진 나만의 공간에서 진정한 나를 발견하는 시간을 가져보세요. 여행 경험과 개인 스토리를 공유합니다.",
-  keywords: "여행, 포트폴리오, 개인브랜딩, 사진, 영상, 블로그, 여행기록",
-  authors: [{ name: "여행자" }],
+  title: "MIMINE WEB",
+  description: "JOSEPH88's Mi-Mine Web",
+  authors: [{ name: "JOSEPH88" }],
   openGraph: {
-    title: "나를 찾아 떠나는 특별한 여행",
-    description: "사진, 영상, 그리고 이야기로 채워진 나만의 공간",
+    title: "Mi-Mine Web",
+    description: "JOSEPH88's Mi-Mine Web",
     type: "website",
+    url: "https://github.com/joseph-seph88/mi-mine-web",
+    images: ["/images/mimine-web.png"],
+    siteName: "MiMine",
   },
 };
 
