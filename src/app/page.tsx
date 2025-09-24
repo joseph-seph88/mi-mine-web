@@ -1,5 +1,5 @@
-import { HomePage } from "@/features/home/ui/home-page";
-import { MainLayout } from "@/shared/ui/layout/main-layout";
+import { HomePage } from "@/features/home/presentation/pages/home-page";
+import { MainLayout } from "@/ui/layout/main-layout";
 
 export default function Home() {
   return (
