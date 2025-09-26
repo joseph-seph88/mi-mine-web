@@ -2,7 +2,7 @@ export class HomePost {
     postId: number;
     title: string;
     content: string;
-    imageUrl: string;
+    imageUrl?: string;
     userId: string;
     likeCount: number;
     commentCount: number;
@@ -15,7 +15,7 @@ export class HomePost {
         postId: number;
         title: string;
         content: string;
-        imageUrl: string;
+        imageUrl?: string;
         userId: string;
         likeCount: number;
         commentCount: number;

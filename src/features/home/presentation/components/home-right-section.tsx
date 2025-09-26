@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { TrendingUp, RefreshCw, Heart, MessageCircle, Clock } from 'lucide-react';
-import Image from 'next/image';
 import { useHomePopularPost } from '../hooks/use-home-popular-post';
+import { SafeImage } from '@/ui/components/safe-image';
 
 export function HomeRightSection() {
     const { data, isLoading, isFetching, error, refetch } = useHomePopularPost();
@@ -113,17 +113,15 @@ export function HomeRightSection() {
                                         </div>
 
                                         {/* 썸네일 이미지 */}
-                                        {post.imageUrl && (
-                                            <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden">
-                                                <Image
-                                                    src={post.imageUrl}
-                                                    alt={post.title}
-                                                    width={64}
-                                                    height={64}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                        )}
+                                        <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-gray-100">
+                                            <SafeImage
+                                                src={post.imageUrl}
+                                                alt={post.title || 'thumbnail'}
+                                                width={64}
+                                                height={64}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
                                     </div>
                                 </motion.div>
                             ))}
