@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/ui/components/button';
 import { AuthModal } from '@/ui/components/auth-modal';
 import { ImagePath } from '@/lib/constants/path/image-path';
@@ -11,6 +13,9 @@ import { useUserInfo } from '@/lib/hooks/use-user';
 export function Header() {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const { data: userInfo } = useUserInfo();
+    const pathname = usePathname();
+    const baseLinkClass = 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-200';
+    const activeClass = 'text-black dark:text-white font-semibold';
 
     return (
         <motion.header
@@ -41,30 +46,30 @@ export function Header() {
 
                     {/* Navigation */}
                     <nav className="hidden md:flex items-center gap-34">
-                        <a
-                            href="#home"
-                            className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-200"
+                        <Link
+                            href="/"
+                            className={`${baseLinkClass} ${pathname === '/' ? activeClass : ''}`}
                         >
                             HOME
-                        </a>
-                        <a
-                            href="#FEED"
-                            className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-200"
+                        </Link>
+                        <Link
+                            href="/feed"
+                            className={`${baseLinkClass} ${pathname.startsWith('/feed') ? activeClass : ''}`}
                         >
                             FEED
-                        </a>
-                        <a
-                            href="#MAP"
-                            className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-200"
+                        </Link>
+                        <Link
+                            href="/map"
+                            className={`${baseLinkClass} ${pathname.startsWith('/map') ? activeClass : ''}`}
                         >
                             MAP
-                        </a>
-                        <a
-                            href="#MY"
-                            className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-200"
+                        </Link>
+                        <Link
+                            href="/my"
+                            className={`${baseLinkClass} ${pathname.startsWith('/my') ? activeClass : ''}`}
                         >
                             MY
-                        </a>
+                        </Link>
                     </nav>
 
                     {/* CTA Button */}
