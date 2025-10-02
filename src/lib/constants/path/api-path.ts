@@ -22,7 +22,8 @@ export enum ApiPath {
     POST_UPDATE = '/post/:postId',
     POST_DELETE = '/post/:postId',
     POST_GET_BY_RADIUS = '/post/radius',
-    POST_GET_BY_POPULARITY = '/post/popularity',
+    POST_GET_BY_BEST = '/post/best',
+    POST_GET_BY_MINE = '/post/mine',
 
     // COMMENT
     COMMENT_CREATE = '/comment',

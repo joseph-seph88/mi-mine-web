@@ -12,7 +12,7 @@ export async function GET() {
     const { controller, cleanup } = withTimeout(8000);
     try {
         return await proxyJson({
-            path: ApiPath.POST_GET_BY_POPULARITY,
+            path: ApiPath.POST_GET_BY_MINE,
             revalidate,
             signal: controller.signal,
         });

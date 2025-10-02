@@ -6,7 +6,7 @@ import { ImagePath } from "@/lib/constants/path/image-path";
 export class HomeRepositoryImpl implements HomeRepository {
     async getPopularPosts(): Promise<any> {
         try {
-            const response = await apiClient.get(BffPath.POSTS_POPULAR);
+            const response = await apiClient.get(BffPath.POSTS_BEST);
             return response.data;
         } catch (error) {
             const now = new Date().toISOString();
