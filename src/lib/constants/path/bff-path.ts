@@ -1,6 +1,8 @@
 export enum BffPath {
-    POSTS_POPULAR = '/api/post/popular',
-    USER = '/api/user',
+    POSTS_ALL = '/api/post/all',
+    POSTS_MY = '/api/post/my',
+    POSTS_BEST = '/api/post/best',
+    USER = '/api/user'
 }
 
 

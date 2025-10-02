@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface FeedTabsProps {
-    active: 'all' | 'mine';
-    onChange: (value: 'all' | 'mine') => void;
+    active: 'all' | 'best';
+    onChange: (value: 'all' | 'best') => void;
 }
 
 export function FeedTabs({ active, onChange }: FeedTabsProps) {
@@ -15,10 +15,10 @@ export function FeedTabs({ active, onChange }: FeedTabsProps) {
                 전체 게시글
             </button>
             <button
-                className={`ml-1 px-4 py-2 text-sm rounded-md ${active === 'mine' ? 'bg-white dark:bg-black shadow font-medium' : 'text-gray-600 dark:text-gray-300'}`}
-                onClick={() => onChange('mine')}
+                className={`ml-1 px-4 py-2 text-sm rounded-md ${active === 'best' ? 'bg-white dark:bg-black shadow font-medium' : 'text-gray-600 dark:text-gray-300'}`}
+                onClick={() => onChange('best')}
             >
-                내 게시글
+                인기 게시글
             </button>
         </div>
     );
