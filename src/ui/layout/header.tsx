@@ -27,7 +27,6 @@ export function Header() {
             <div className="max-w-6xl mx-auto px-4 py-3">
                 <div className="flex items-center justify-between">
 
-                    {/* Logo */}
                     <motion.div
                         className="flex items-center gap-3"
                         whileHover={{ scale: 1.05 }}
@@ -44,7 +43,6 @@ export function Header() {
                         <span className="text-xl font-bold text-black dark:text-white">MiMiNE</span>
                     </motion.div>
 
-                    {/* Navigation */}
                     <nav className="hidden md:flex items-center gap-34">
                         <Link
                             href="/"
@@ -72,7 +70,6 @@ export function Header() {
                         </Link>
                     </nav>
 
-                    {/* CTA Button */}
                     <Button
                         variant="primary"
                         size="md"
@@ -83,7 +80,6 @@ export function Header() {
                 </div>
             </div>
 
-            {/* Auth Modal */}
             <AuthModal
                 isOpen={isAuthModalOpen}
                 onClose={() => setIsAuthModalOpen(false)}

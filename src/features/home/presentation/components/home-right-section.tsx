@@ -30,7 +30,6 @@ export function HomeRightSection() {
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.3 }}
             >
-                {/* 헤더 */}
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-2">
                         <TrendingUp className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
@@ -47,14 +46,12 @@ export function HomeRightSection() {
                     </button>
                 </div>
 
-                {/* 로딩 상태 */}
                 {isLoading && (
                     <div className="flex items-center justify-center py-12">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
                     </div>
                 )}
 
-                {/* 에러 상태 */}
                 {!!error && (
                     <div className="text-center py-12">
                         <p className="text-red-500 dark:text-red-400 mb-4">데이터를 불러오는 중 오류가 발생했습니다.</p>
@@ -67,7 +64,6 @@ export function HomeRightSection() {
                     </div>
                 )}
 
-                {/* 포스트 목록 */}
                 {!isLoading && !error && postList.length > 0 && (
                     <div className="overflow-y-auto max-h-[480px] pr-2">
                         <div className="space-y-4">
@@ -81,7 +77,6 @@ export function HomeRightSection() {
                                     whileHover={{ scale: 1.02 }}
                                 >
                                     <div className="flex items-start gap-3">
-                                        {/* 포스트 내용 */}
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-2 mb-2">
                                                 <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
@@ -112,7 +107,6 @@ export function HomeRightSection() {
                                             </div>
                                         </div>
 
-                                        {/* 썸네일 이미지 */}
                                         <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-gray-100">
                                             <SafeImage
                                                 src={post.imageUrl}
@@ -129,7 +123,6 @@ export function HomeRightSection() {
                     </div>
                 )}
 
-                {/* 빈 상태 */}
                 {!isLoading && !error && postList.length === 0 && (
                     <div className="text-center py-12">
                         <TrendingUp className="w-12 h-12 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
