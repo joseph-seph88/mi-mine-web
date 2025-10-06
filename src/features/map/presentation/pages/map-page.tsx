@@ -4,7 +4,17 @@ import { MainLayout } from '@/ui/layout/main-layout';
 import dynamic from 'next/dynamic';
 import { useMapPins } from '../hooks/use-map-pins';
 
-const NaverMap = dynamic(() => import('../components/naver-map'), { ssr: false });
+const NaverMap = dynamic(() => import('../components/naver-map'), { 
+    ssr: false,
+    loading: () => (
+        <div className="w-full h-[520px] flex items-center justify-center border rounded">
+            <div className="text-center">
+                <div className="text-lg font-medium text-gray-700 dark:text-gray-300">지도를 불러오는 중...</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400 mt-2">잠시만 기다려주세요</div>
+            </div>
+        </div>
+    )
+});
 
 export default function MapFeaturePage() {
     const { data: pins } = useMapPins();

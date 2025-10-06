@@ -32,8 +32,8 @@ export function HomeLeftSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
             >
-                Join The Mining<br />
-                Embark On The Adventure
+                Explore. Discover. Share.<br />
+                Next Adventure Awaits
             </motion.p>
 
             <motion.div
@@ -70,6 +70,7 @@ export function HomeLeftSection() {
                 </motion.button>
 
                 <motion.button
+                    onClick={() => window.location.href = '/feed'}
                     className="flex items-center justify-center gap-2 bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-gray-50 dark:hover:bg-gray-900 transition-all duration-300"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

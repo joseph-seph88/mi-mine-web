@@ -41,24 +41,61 @@ export default function NaverMap({
     const markerRef = useRef<any | null>(null);
     const [isScriptLoaded, setIsScriptLoaded] = useState(false);
     const externalMarkersRef = useRef<any[]>([]);
-
-    // 1) Initialize map once after SDK is loaded
+    const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+    const [scriptKey, setScriptKey] = useState(() => Math.random().toString(36));
     useEffect(() => {
-        if (!isScriptLoaded || !mapContainerRef.current || !window.naver?.maps) return;
-        if (mapRef.current) return; // already initialized
+        setScriptKey(Math.random().toString(36));
+    }, [pathname]);
 
+    useEffect(() => {
+        return () => {
+            externalMarkersRef.current.forEach((marker) => {
+                if (marker && marker.setMap) {
+                    marker.setMap(null);
+                }
+            });
+            externalMarkersRef.current = [];
+            if (markerRef.current && markerRef.current.setMap) {
+                markerRef.current.setMap(null);
+                markerRef.current = null;
+            }
+            if (mapRef.current) {
+                mapRef.current = null;
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        let retryTimer = null;
+        if (!isScriptLoaded || !mapContainerRef.current) return;
+        if (!window.naver?.maps) {
+            setIsScriptLoaded(false);
+            setScriptKey(Math.random().toString(36));
+            return;
+        }
+        externalMarkersRef.current.forEach((marker) => {
+            if (marker && marker.setMap) {
+                marker.setMap(null);
+            }
+        });
+        externalMarkersRef.current = [];
+        if (markerRef.current && markerRef.current.setMap) {
+            markerRef.current.setMap(null);
+            markerRef.current = null;
+        }
+        if (mapRef.current) {
+            mapRef.current = null;
+        }
         const center = new window.naver.maps.LatLng(latitude, longitude);
         mapRef.current = new window.naver.maps.Map(mapContainerRef.current, {
             center,
             zoom,
             minZoom: 7,
         });
-
         markerRef.current = new window.naver.maps.Marker({
             position: center,
             map: mapRef.current,
         });
-
         if (onMapClick) {
             window.naver.maps.Event.addListener(mapRef.current, 'click', (e: any) => {
                 const lat = e.coord._lat ?? e.coord.y;
@@ -66,17 +103,18 @@ export default function NaverMap({
                 onMapClick(lat, lng);
             });
         }
-
         if (onIdle) {
             window.naver.maps.Event.addListener(mapRef.current, 'idle', () => {
-                const c = mapRef.current!.getCenter();
-                const z = mapRef.current!.getZoom();
+                const c = mapRef.current.getCenter();
+                const z = mapRef.current.getZoom();
                 onIdle(c._lat ?? c.y, c._lng ?? c.x, z);
             });
         }
-    }, [isScriptLoaded]);
+        return () => {
+            if (retryTimer) clearTimeout(retryTimer);
+        };
+    }, [isScriptLoaded, mapContainerRef, pathname]);
 
-    // 2) Update center/zoom when props change
     useEffect(() => {
         if (!isScriptLoaded || !mapRef.current || !window.naver?.maps) return;
         const center = new window.naver.maps.LatLng(latitude, longitude);
@@ -89,7 +127,6 @@ export default function NaverMap({
         }
     }, [isScriptLoaded, latitude, longitude, zoom]);
 
-    // 3) Render external markers when props change
     useEffect(() => {
         if (!isScriptLoaded || !mapRef.current || !window.naver?.maps) return;
         externalMarkersRef.current.forEach((m) => m.setMap(null));
@@ -103,10 +140,8 @@ export default function NaverMap({
         });
     }, [isScriptLoaded, markers]);
 
-    const clientId = process.env.NAVER_MAP_CLIENT_ID ?? process.env.NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID;
-    if (typeof window !== 'undefined') {
-        console.log('NaverMap env check', { origin: window.location.origin, clientId });
-    }
+    const clientId = process.env.NEXT_PUBLIC_NAVER_MAPS_CLIENT_ID;
+    
 
     if (!clientId) {
         return (
@@ -129,8 +164,7 @@ export default function NaverMap({
                     markerRef.current = new window.naver.maps.Marker({ position: latLng, map: mapRef.current });
                 }
             },
-            () => {
-            },
+            () => {},
             { enableHighAccuracy: true, timeout: 8000 }
         );
     };
@@ -138,11 +172,14 @@ export default function NaverMap({
     return (
         <>
             <Script
-                src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}${submodules.length ? `&submodules=${submodules.join(',')}` : ''}`}
+                key={scriptKey}
+                src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${clientId}${submodules.length ? `&submodules=${submodules.join(',')}` : ''}`}
                 strategy="afterInteractive"
-                onLoad={() => setIsScriptLoaded(true)}
+                onLoad={() => {
+                    setIsScriptLoaded(true);
+                }}
                 onError={() => {
-                    console.error('네이버 지도 SDK 로드 실패. clientId나 허용 도메인을 확인하세요.');
+                    setIsScriptLoaded(false);
                 }}
             />
             <div style={{ position: 'relative' }}>
@@ -158,7 +195,7 @@ export default function NaverMap({
                         right: 12,
                         top: 12,
                         zIndex: 5,
-                        background: 'white',
+                        background: 'black',
                         border: '1px solid #e5e7eb',
                         borderRadius: 8,
                         padding: '6px 10px',

@@ -22,9 +22,11 @@ export function Footer() {
                         >
                             <span className="text-xl font-bold text-black dark:text-white">MiMiNE 주식회사</span>
                         </motion.div>
-                        <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md">
+                        <p className="text-gray-600 dark:text-gray-400 max-w-md">
                             이것은 마이닝하기 위한 첫번째 레슨입니다.
-                            두번째 레슨을 기다려주세요.
+                        </p>
+                        <p className="text-gray-600 dark:text-gray-400 max-w-md">
+                            두번째 레슨은 곧 시작됩니다.
                         </p>
                     </div>
 

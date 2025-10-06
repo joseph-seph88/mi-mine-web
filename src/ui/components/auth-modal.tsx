@@ -58,6 +58,8 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                                 size="lg"
                                 className="w-full"
                                 onClick={() => {
+                                        window.location.href = '/signup';
+
                                     console.log('회원가입');
                                     onClose();
                                 }}
