@@ -1,0 +1,91 @@
+'use client';
+
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Button } from '@/ui/components/button';
+import { AuthModal } from '@/ui/components/auth-modal';
+import { ImagePath } from '@/lib/constants/path/image-path';
+import { useUserInfo } from '@/lib/hooks/use-user';
+
+export function Header() {
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const { data: userInfo } = useUserInfo();
+    const pathname = usePathname();
+    const baseLinkClass = 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-200';
+    const activeClass = 'text-black dark:text-white font-semibold';
+
+    return (
+        <motion.header
+            className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            <div className="max-w-6xl mx-auto px-4 py-3">
+                <div className="flex items-center justify-between">
+
+                    <motion.div
+                        className="flex items-center gap-3"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <div className="w-12 h-12 relative rounded-full overflow-hidden border-2 border-black dark:border-white">
+                            <Image
+                                src={ImagePath.MIMINE_LOGO}
+                                alt="Mimine Logo"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                        <span className="text-xl font-bold text-black dark:text-white">MiMiNE</span>
+                    </motion.div>
+
+                    <nav className="hidden md:flex items-center gap-34">
+                        <Link
+                            href="/"
+                            className={`${baseLinkClass} ${pathname === '/' ? activeClass : ''}`}
+                        >
+                            HOME
+                        </Link>
+                        <Link
+                            href="/feed"
+                            className={`${baseLinkClass} ${pathname.startsWith('/feed') ? activeClass : ''}`}
+                        >
+                            FEED
+                        </Link>
+                        <Link
+                            href="/map"
+                            className={`${baseLinkClass} ${pathname.startsWith('/map') ? activeClass : ''}`}
+                        >
+                            MAP
+                        </Link>
+                        <Link
+                            href="/my"
+                            className={`${baseLinkClass} ${pathname.startsWith('/my') ? activeClass : ''}`}
+                        >
+                            MY
+                        </Link>
+                    </nav>
+
+                    <Button
+                        variant="primary"
+                        size="md"
+                        onClick={() => setIsAuthModalOpen(true)}
+                    >
+                        시작하기
+                    </Button>
+                </div>
+            </div>
+
+            <AuthModal
+                isOpen={isAuthModalOpen}
+                onClose={() => setIsAuthModalOpen(false)}
+            />
+        </motion.header>
+    );
+}
+
+

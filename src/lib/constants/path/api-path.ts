@@ -1,0 +1,30 @@
+export enum ApiPath {
+    APP_INFO = '/app/info',
+    APP_HEALTH = '/app/health',
+
+    AUTH_REGISTER = '/auth/register',
+    AUTH_LOGIN = '/auth/login',
+    AUTH_DELETE_TOKEN = '/auth/delete-token',
+    AUTH_REFRESH_TOKEN = '/auth/refresh',
+
+    USER_INFO = '/user',
+    USER_UPDATE = '/user/update',
+    USER_DELETE = '/user/delete',
+
+    POST_CREATE = '/post/create',
+    POST_GET_ALL = '/post',
+    POST_GET_BY_USER_ID = '/post/user/:userId',
+    POST_GET_BY_POST_ID = '/post/detail/:postId',
+    POST_UPDATE = '/post/:postId/update',
+    POST_DELETE = '/post/:postId/delete',
+    POST_GET_BY_RADIUS = '/post/radius',
+    POST_GET_BY_BEST = '/post/best',
+    POST_GET_BY_MINE = '/post/mine',
+    COMMENT_CREATE = '/comment',
+    COMMENT_GET_BY_USER_ID = '/comment/user/',
+    COMMENT_GET_BY_POST_ID = '/comment/post/:postId',
+    COMMENT_GET_BY_COMMENT_ID = '/comment/:commentId',
+    COMMENT_UPDATE = '/comment/:commentId/update',
+    COMMENT_DELETE = '/comment/:commentId/delete',
+    COMMENT_GET_REPLIES = '/comment/:commentId/replies',
+}

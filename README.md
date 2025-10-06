@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MIMINE WEB v1.0.0
+JOSEPH88's MIMINE 프로젝트의 웹 애플리케이션입니다.
 
-## Getting Started
+# Version
+- **Next.js** `15.5.2`
+- **React** `19.1.0`
+- **Node.js** `v23.3.0`
+- **npm** `11.0.0`
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Architecture Overview
+This Next.js 15 app uses **Clean Architecture** with feature-based modules. Each feature follows a strict 3-layer pattern:
+- `domain/` - Entities, repositories (interfaces), and use cases
+- `infrastructure/` - Repository implementations and external service integrations  
+- `presentation/` - React components, hooks, and UI logic
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/3057e904-dafb-4d34-b5ce-2c819d77f5bc" alt="Home Screen" style="width: 200px; height: 200px; object-fit: cover; margin: 5px;">
+  <img src="https://github.com/user-attachments/assets/9effee3d-a490-49c3-9636-1355e617756f" alt="Map Feature" style="width: 200px; height: 200px; object-fit: cover; margin: 5px;">
+  <img src="https://github.com/user-attachments/assets/55a5416a-64c0-4fd9-9fcf-cdae398fea8d" alt="Community Feature" style="width: 200px; height: 200px; object-fit: cover; margin: 5px;">
+  <img src="https://github.com/user-attachments/assets/5c4a1f82-f214-4d5c-8215-af191282a036" alt="Community Feature" style="width: 200px; height: 200px; object-fit: cover; margin: 5px;">
+</div>
